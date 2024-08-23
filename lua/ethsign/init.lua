@@ -20,3 +20,24 @@ require('mini.cursorword').setup({
 
 vim.opt.cursorline = true
 vim.api.nvim_command('highlight CursorLine guibg=#2b2b2b')
+
+-- LSP setup for Python using python-lsp-server
+require('lspconfig').pylsp.setup({
+    settings = {
+        pylsp = {
+            plugins = {
+                black = { enabled = true },        -- Enable black formatter
+                pyls_isort = { enabled = true },   -- Optionally enable isort for imports
+                pycodestyle = { enabled = false }, -- Disable other formatters/linters if needed
+            },
+        },
+    },
+})
+
+-- Auto format on save for Python files
+vim.cmd([[
+  augroup FormatOnSave
+    autocmd!
+    autocmd BufWritePre *.py lua vim.lsp.buf.format({ async = false })
+  augroup END
+]])
