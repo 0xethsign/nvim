@@ -39,7 +39,40 @@ vim.cmd([[
   augroup FormatOnSave
     autocmd!
     autocmd BufWritePre *.py lua vim.lsp.buf.format({ async = false })
+    autocmd BufWritePre *.js lua vim.lsp.buf.format({ async = false })
+    autocmd BufWritePre *.ts lua vim.lsp.buf.format({ async = false })
   augroup END
 ]])
 
+for _, method in ipairs({ 'textDocument/diagnostic', 'workspace/diagnostic' }) do
+    local default_diagnostic_handler = vim.lsp.handlers[method]
+    vim.lsp.handlers[method] = function(err, result, context, config)
+        if err ~= nil and err.code == -32802 then
+            return
+        end
+        return default_diagnostic_handler(err, result, context, config)
+    end
+end
 
+-- LSP setup for TypeScript and JavaScript (ts_ls)
+require('lspconfig').ts_ls.setup({
+    on_attach = function(client, bufnr)
+        client.server_capabilities.documentFormattingProvider = true
+
+        local opts = { noremap = true, silent = true, buffer = bufnr }
+        vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+        vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
+    end,
+    settings = {
+        javascript = {
+            format = {
+                enable = true, -- Enable formatting
+            },
+        },
+        typescript = {
+            format = {
+                enable = true, -- Enable formatting
+            },
+        },
+    },
+})
