@@ -19,7 +19,11 @@ return require('packer').startup(function(use)
 
     -- vim.cmd('colorscheme rose-pine')
 
-    use({ 'nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' } })
+
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate'
+    }
 
     use({ 'nvim-treesitter/playground' })
 
@@ -53,4 +57,6 @@ return require('packer').startup(function(use)
             { 'L3MON4D3/LuaSnip' },     -- Required
         }
     }
+
+    use 'nvimtools/none-ls.nvim'
 end)
