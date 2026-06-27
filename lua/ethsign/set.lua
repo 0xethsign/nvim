@@ -30,4 +30,10 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 
+-- Disable unused remote-host providers (no remote plugins in use)
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_node_provider = 0
+vim.g.loaded_python3_provider = 0
+
 
