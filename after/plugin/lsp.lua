@@ -1,16 +1,15 @@
 require('mason').setup()
-require('mason-lspconfig').setup({
-  ensure_installed = { 'lua_ls', 'rust_analyzer' },
-})
 
 local lsp = require('lsp-zero')
 
 lsp.preset('recommended')
 
--- lsp.ensure_installed({
--- 	'lua_ls',
--- 	'rust_analyzer',
--- })
+require('mason-lspconfig').setup({
+    ensure_installed = { 'lua_ls', 'rust_analyzer', 'jsonls', 'pylsp' },
+    handlers = {
+        lsp.default_setup,
+    },
+})
 
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}

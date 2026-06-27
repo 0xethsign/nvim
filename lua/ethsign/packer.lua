@@ -4,22 +4,19 @@
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
-    -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.4',
-        -- or                            , branch = '0.1.x',
+        'nvim-telescope/telescope.nvim', tag = '0.1.8',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
 
-    use({ 'rose-pine/neovim', as = 'rose-pine' })
     use({ 'Mofiqul/vscode.nvim', as = 'vscode' })
     use({ "ellisonleao/gruvbox.nvim", as = 'gruvbox' })
-
-    -- vim.cmd('colorscheme rose-pine')
-
-    use({ 'nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' } })
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate'
+    }
 
     use({ 'nvim-treesitter/playground' })
 
@@ -53,4 +50,6 @@ return require('packer').startup(function(use)
             { 'L3MON4D3/LuaSnip' },     -- Required
         }
     }
+
+    use 'nvimtools/none-ls.nvim'
 end)
