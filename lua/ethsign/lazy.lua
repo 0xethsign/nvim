@@ -23,7 +23,7 @@ require("lazy").setup({
     { 'Mofiqul/vscode.nvim', name = 'vscode' },
     { 'ellisonleao/gruvbox.nvim', name = 'gruvbox' },
 
-    { 'nvim-treesitter/nvim-treesitter', branch = 'master', build = ':TSUpdate' },
+    { 'nvim-treesitter/nvim-treesitter', branch = 'main', build = ':TSUpdate' },
 
     { 'theprimeagen/harpoon' },
     { 'mbbill/undotree' },
